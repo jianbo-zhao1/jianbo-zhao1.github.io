@@ -156,14 +156,14 @@ function App() {
     {
       name: "Agora",
       description: "As Founding Engineer, I am architecting the core trading platform (React/Node/Firebase). This live demo is 'Agora Connect', a pitch & marketing site I built to demonstrate our vision and secure early user interest.",      
-      imageUrl: "/images/agora_logo.svg",
+      imageUrl: "images/agora_logo.svg",
       demoLink: "https://agora-connect.web.app/", 
       tags: ["React", "TypeScript", "Node.js", "Tailwind CSS", "Firebase"]
     },
     {
       name: "Vend-nier",
       description: "Engineered a geospatial web application enabling real-time amenity discovery for the OSU community. I integrated Google Gemini to power natural language voice search and managed the full-stack cloud deployment.",
-      imageUrl: "/images/vendnier_preview.png",
+      imageUrl: "images/vendnier_preview.png",
       githubLink: "https://github.com/jianbo-zhao1/vending-machine", 
       demoLink: "https://vend-nier.onrender.com/", 
       tags: ["Python (Flask)", "Gemini AI", "Elasticsearch", "Render"] 
@@ -177,7 +177,7 @@ function App() {
       <div className="container">
         <header className="hero-section"> 
           <div className="avatar-wrapper">
-            <img src="/images/avatar.png" alt={me.name} className="avatar" />
+            <img src="images/avatar.png" alt={me.name} className="avatar" />
           </div>
 
           <h1 className="hero-name">{me.name}</h1>
