@@ -125,7 +125,8 @@ function App() {
   const me: ProfileData = {
     name: "Jianbo Zhao",
     role: "Founding Engineer @ Agora",
-    bio: "Senior CS Student (Dec '25) & Founding Engineer specializing in Full-stack Web & Mobile Development. I build scalable products from 0 to 1 using React, TypeScript, and Swift. Actively seeking Web/Mobile Software Engineering roles for 2026.",    skills: ["TypeScript", "React", "Swift", "iOS", "Node.js", "Python", "Elasticsearch"]
+    bio: "Senior CS Student (Dec '25) & Founding Engineer specializing in Full-stack Web & Mobile Development. I build scalable products from 0 to 1 using React, TypeScript, and Swift. Actively seeking Web/Mobile Software Engineering roles for 2026.",    
+    skills: ["TypeScript", "React", "Node.js", "Java", "Swift", "Python", "Elasticsearch"]
   }
 
   const experiences: Experience[] = [
@@ -239,7 +240,7 @@ function App() {
         </section>
 
         <footer className="footer" style={{ animationDelay: '0.4s' }}>
-          <p>© 2025 Allen Zhao. Built with React & TypeScript.</p>
+          <p>© 2025 Jianbo Zhao. Built with React & TypeScript.</p>
         </footer>
       </div>
     </div>
