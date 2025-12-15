@@ -1,7 +1,7 @@
 :root {
   --bg-color: #fafafa;
   --text-primary: #111827;
-  --text-secondary: #6b7280;
+  --text-secondary: #4b5563;
   --accent-color: #2563eb;
   --card-bg: #ffffff;
 }
@@ -10,6 +10,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+*:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
 }
 
 body {
@@ -96,6 +100,7 @@ body {
   margin-top: 24px;
   font-size: 1.05rem;
   color: #4b5563;
+  color: var(--text-secondary);
   max-width: 600px;
   line-height: 1.6;
 }
@@ -109,14 +114,15 @@ body {
 
 .social-icon {
   color: var(--text-primary);
-  opacity: 0.7;
+  opacity: 0.8;
   transition: all 0.2s ease;
   padding: 10px;
   border-radius: 50%;
-  background: rgba(0,0,0,0.03);
+  background: rgba(0,0,0,0.05);
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
 }
 
 .social-icon:hover {
@@ -138,7 +144,7 @@ body {
   font-size: 0.85rem;
   padding: 4px 12px;
   background-color: #fff;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #d1d5db;
   border-radius: 20px;
   color: var(--text-secondary);
   font-weight: 500;
@@ -166,9 +172,9 @@ body {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   margin-bottom: 24px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .section-label svg {
@@ -197,7 +203,7 @@ body {
 
 .project-image-wrapper {
   height: 240px;
-  background-color: #f3f4f6;
+  background-color: #e5e7eb;
   overflow: hidden;
   border-bottom: 1px solid #f3f4f6;
 }
@@ -269,6 +275,7 @@ body {
   padding: 4px 8px;
   border-radius: 6px;
   font-family: monospace;
+  font-weight: 500;
 }
 
 .education-card {
@@ -301,7 +308,7 @@ body {
 
 .edu-date {
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   font-weight: 500;
   background-color: #f3f4f6;
   padding: 4px 10px;
@@ -359,7 +366,7 @@ body {
 .footer {
   text-align: center;
   margin-top: 80px;
-  color: #9ca3af;
+  color: #6b7280;
   font-size: 0.85rem;
   opacity: 0;
   animation: fadeInUp 0.6s ease-out forwards;
