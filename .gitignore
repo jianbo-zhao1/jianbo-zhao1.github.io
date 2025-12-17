@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+agora_logo.svg
+avatar.png
+monogram.png
+.env
