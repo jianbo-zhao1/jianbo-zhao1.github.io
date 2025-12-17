@@ -23,7 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-agora_logo.svg
-avatar.png
-monogram.png
+*.svg
+*.png
 .env
