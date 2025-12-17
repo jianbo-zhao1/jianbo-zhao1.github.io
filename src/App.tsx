@@ -1,33 +1,34 @@
-import './App.css'
+import { useEffect, useRef, useState, type ReactNode } from 'react';
+import './App.css';
 
 interface ProfileData {
-  name: string,
-  role: string,
-  bio: string,
-  skills: string[]
+  name: string;
+  role: string;
+  bio: string;
+  skills: string[];
 }
 
 interface Project {
-  name: string,
-  description: string,
-  imageUrl?: string,
-  demoLink?: string,
-  githubLink?: string,
-  tags?: string[]
+  name: string;
+  description: string;
+  imageUrl?: string;
+  demoLink?: string;
+  githubLink?: string;
+  tags?: string[];
 }
 
 interface Experience {
-  company: string,
-  role: string,
-  date: string,
-  description: string,
-  tags?: string[]
+  company: string;
+  role: string;
+  date: string;
+  description: string;
+  tags?: string[];
 }
 
 interface Education {
-  school: string,
-  degree: string,
-  date: string
+  school: string;
+  degree: string;
+  date: string;
 }
 
 const Icons = {
@@ -49,6 +50,34 @@ const Icons = {
   School: () => (
     <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 0 6-1 6-1v-7"></path></svg>
   )
+};
+
+function Reveal({ children, delay = 0 }: { children: ReactNode, delay?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className="reveal-on-scroll" style={{ transitionDelay: `${delay}s` }}>
+      {children}
+    </div>
+  );
 }
 
 function ExperienceCard({ exp }: { exp: Experience }) {
@@ -63,14 +92,14 @@ function ExperienceCard({ exp }: { exp: Experience }) {
       </div>
       <p className="exp-desc">{exp.description}</p>
       {exp.tags && (
-        <div className="tags-container" style={{marginTop: '12px'}}>
+        <div className="tags-container" style={{ marginTop: '16px' }}>
           {exp.tags.map(tag => (
             <span key={tag} className="tech-tag">{tag}</span>
           ))}
         </div>
       )}
     </div>
-  )
+  );
 }
 
 function ProjectCard({ project }: { project: Project }) {
@@ -118,16 +147,29 @@ function ProjectCard({ project }: { project: Project }) {
         )}
       </div>
     </div>
-  )
+  );
 }
 
 function App() {
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollTop;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scroll = totalScroll / windowHeight;
+      setScrollProgress(scroll);
+    }
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const me: ProfileData = {
-    name: "Jianbo Zhao",
+    name: "Jianbo (Allen) Zhao",
     role: "Founding Engineer @ Agora",
-    bio: "Senior CS Student (Dec '25) & Founding Engineer specializing in Full-stack Web & Mobile Development. I build scalable products from 0 to 1 using React, TypeScript, and Swift. Actively seeking Web/Mobile Software Engineering roles for 2026.",    
+    bio: "Senior CS Student (Dec '25) & Founding Engineer specializing in Full Stack Web & Mobile Development. I build scalable products from 0 to 1 using React, TypeScript, and Swift. Actively seeking Web/Mobile Software Engineering roles for 2026.",    
     skills: ["TypeScript", "React", "Node.js", "Java", "Swift", "Python", "Elasticsearch"]
-  }
+  };
 
   const experiences: Experience[] = [
     {
@@ -144,14 +186,13 @@ function App() {
       description: "Oversee operations for a high volume 3D printer farm. Engineered custom G-code scripts and JSON slicer profiles to automate workflows, significantly reducing print failure rates and optimizing hardware performance.",
       tags: ["G-Code", "Python", "Hardware/Software", "Operations"]
     }
-  ]
+  ];
   
   const education: Education = {
     school: "The Ohio State University",
     degree: "B.S. in Computer Science Engineering",
     date: "Dec 2025"
-  }
-
+  };
 
   const projects: Project[] = [
     {
@@ -163,88 +204,109 @@ function App() {
     },
     {
       name: "Vend-nier",
-      description: "Engineered a geospatial web application enabling real-time amenity discovery for the OSU community. I integrated Google Gemini to power natural language voice search and managed the full-stack cloud deployment.",
+      description: "Engineered a geospatial web application enabling real time amenity discovery for the OSU community. I integrated Google Gemini to power natural language voice search and managed the full stack cloud deployment.",
       imageUrl: "images/vendnier_preview.png",
       githubLink: "https://github.com/jianbo-zhao1/vending-machine", 
       demoLink: "https://vend-nier.onrender.com/", 
       tags: ["Python (Flask)", "Gemini AI", "Elasticsearch", "Render"] 
     }
-  ]
+  ];
 
   const email = ['z','h','a','o','j','i','a','n','b','o','9','8','@','g','m','a','i','l','.','c','o','m'].join('');
 
   return (
     <div className="page-wrapper">
-      <div className="container">
-        <header className="hero-section"> 
-          <div className="avatar-wrapper">
-            <img src="images/avatar.png" alt="" className="avatar" />
-          </div>
-
-          <h1 className="hero-name">{me.name}</h1>
-          <h2 className="hero-role">{me.role}</h2>
-          
-          <div className="social-links">
-            <a href={`mailto:${email}`} className="social-icon" title="Email Me">
-              <Icons.Email />
-            </a>
-            <a href="https://www.linkedin.com/in/zhao-allen" target="_blank" rel="noopener noreferrer" className="social-icon" title="LinkedIn">
-              <Icons.LinkedIn />
-            </a>
-            <a href="https://github.com/jianbo-zhao1" target="_blank" rel="noopener noreferrer" className="social-icon" title="GitHub">
-              <Icons.GitHub />
-            </a>
-          </div>
-
-          <div className="skills-wrapper">
-            {me.skills.map((skill) => (
-              <span key={skill} className="skill-pill">
-                {skill}
-              </span>
-            ))}
-          </div>
-
-          <p className="hero-bio">{me.bio}</p>
-        </header>
-
-        {/* 1. Selected Projects - Now First */}
-        <main className="section-block" style={{ animationDelay: '0.1s' }}>
-          <h2 className="section-label">Selected Projects</h2>
-          <div className="projects-grid">
-            {projects.map((project) => (
-              <ProjectCard key={project.name} project={project} />
-            ))}
-          </div>
-        </main>
-
-        {/* 2. Experience - Second */}
-        <section className="section-block" style={{ animationDelay: '0.2s' }}>
-          <h2 className="section-label"><Icons.Work /> Experience</h2>
-          <div className="projects-grid">
-            {experiences.map((exp) => (
-              <ExperienceCard key={exp.company} exp={exp} />
-            ))}
-          </div>
-        </section>
-
-        {/* 3. Education - Last */}
-        <section className="section-block" style={{ animationDelay: '0.3s' }}>
-          <h2 className="section-label"><Icons.School /> Education</h2>
-          <div className="education-card">
-            <div className="edu-info">
-              <h3 className="edu-school">{education.school}</h3>
-              <p className="edu-degree">{education.degree}</p>
-            </div>
-            <span className="edu-date">{education.date}</span>
-          </div>
-        </section>
-
-        <footer className="footer" style={{ animationDelay: '0.4s' }}>
-          <p>© 2025 Jianbo Zhao. Built with React & TypeScript.</p>
-        </footer>
+      <div className="scroll-progress-container">
+        <div 
+          className="scroll-progress-bar" 
+          style={{ transform: `scaleX(${scrollProgress})` }} 
+        />
       </div>
+
+      <div className="background-mesh" aria-hidden="true"></div>
+      
+      <header className="hero-section">
+        <div className="container">
+          <Reveal>
+            <div className="avatar-wrapper">
+              <img src="images/avatar.png" alt="" className="avatar" />
+            </div>
+            <h1 className="hero-name">{me.name}</h1>
+            <h2 className="hero-role">{me.role}</h2>
+            
+            <div className="social-links">
+              <a href={`mailto:${email}`} className="social-icon" title="Email Me">
+                <Icons.Email />
+              </a>
+              <a href="https://www.linkedin.com/in/zhao-allen" target="_blank" rel="noopener noreferrer" className="social-icon" title="LinkedIn">
+                <Icons.LinkedIn />
+              </a>
+              <a href="https://github.com/jianbo-zhao1" target="_blank" rel="noopener noreferrer" className="social-icon" title="GitHub">
+                <Icons.GitHub />
+              </a>
+            </div>
+
+            <div className="skills-wrapper">
+              {me.skills.map((skill) => (
+                <span key={skill} className="skill-pill">
+                  {skill}
+                </span>
+              ))}
+            </div>
+
+            <p className="hero-bio">{me.bio}</p>
+          </Reveal>
+        </div>
+      </header>
+
+      <section className="section-band">
+        <div className="container">
+          <Reveal>
+            <h2 className="section-label">Selected Projects</h2>
+            <div className="projects-grid">
+              {projects.map((project) => (
+                <ProjectCard key={project.name} project={project} />
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section-band alt-bg">
+        <div className="container">
+          <Reveal delay={0.1}>
+            <h2 className="section-label"><Icons.Work /> Experience</h2>
+            <div className="experience-list">
+              {experiences.map((exp) => (
+                <ExperienceCard key={exp.company} exp={exp} />
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section-band">
+        <div className="container">
+          <Reveal delay={0.1}>
+            <h2 className="section-label"><Icons.School /> Education</h2>
+            <div className="education-card">
+              <div className="edu-info">
+                <h3 className="edu-school">{education.school}</h3>
+                <p className="edu-degree">{education.degree}</p>
+              </div>
+              <span className="edu-date">{education.date}</span>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <footer className="footer">
+        <Reveal>
+          <p>© 2025 Jianbo Zhao.</p>
+        </Reveal>
+      </footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
