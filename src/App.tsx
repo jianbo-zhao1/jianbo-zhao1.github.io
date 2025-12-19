@@ -182,7 +182,7 @@ function App() {
     {
       company: "OSU Makerspace",
       role: "Makerspace Mentor",
-      date: "Aug 2024 - Present", 
+      date: "Aug 2024 - Dec 2025", 
       description: "Oversee operations for a high volume 3D printer farm. Engineered custom G-code scripts and JSON slicer profiles to automate workflows, significantly reducing print failure rates and optimizing hardware performance.",
       tags: ["G-Code", "Python", "Hardware/Software", "Operations"]
     }
