@@ -110,6 +110,7 @@ function ProjectCard({ project }: { project: Project }) {
           <img 
             src={project.imageUrl} 
             alt=""
+            draggable="false"
             className="project-image"
             onError={(e) => {
               (e.target as HTMLImageElement).style.display = 'none';
@@ -167,8 +168,9 @@ function App() {
   const me: ProfileData = {
     name: "Jianbo (Allen) Zhao",
     role: "Founding Engineer @ Agora",
-    bio: "Senior CS Student (Dec '25) & Founding Engineer specializing in Full Stack Web & Mobile Development. I build scalable products from 0 to 1 using React, TypeScript, and Swift. Actively seeking Web/Mobile Software Engineering roles for 2026.",    
-    skills: ["TypeScript", "React", "Node.js", "Java", "Swift", "Python", "Elasticsearch"]
+    bio: `Computer Science Engineering Graduate (Dec '25) & Founding Engineer specializing in Full Stack Web & Mobile Development. I build scalable products from 0 to 1 using React, TypeScript, and Swift. 
+    Actively seeking Web/Mobile Software Engineering roles for 2026.`,    
+    skills: ["TypeScript", "React", "Node.js", "Java", "Swift", "Python", "Elasticsearch", "LLM", "SQL"]
   };
 
   const experiences: Experience[] = [
@@ -229,7 +231,7 @@ function App() {
         <div className="container">
           <Reveal>
             <div className="avatar-wrapper">
-              <img src="images/avatar.png" alt="" className="avatar" />
+              <img src="images/avatar.png" alt="" draggable="false" className="avatar" />
             </div>
             <h1 className="hero-name">{me.name}</h1>
             <h2 className="hero-role">{me.role}</h2>
@@ -302,7 +304,7 @@ function App() {
 
       <footer className="footer">
         <Reveal>
-          <p>© 2025 Jianbo Zhao.</p>
+          <p>© 2026 Jianbo Zhao.</p>
         </Reveal>
       </footer>
     </div>

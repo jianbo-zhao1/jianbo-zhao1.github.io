@@ -57,7 +57,7 @@ body {
 
 .scroll-progress-bar {
   height: 100%;
-  background: var(--accent-color);
+  background: #967359;
   transform-origin: 0%;
   width: 100%;
 }
@@ -191,8 +191,8 @@ body {
   opacity: 1;
   transform: translateY(-3px);
   background: white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  color: var(--accent-color);
+  box-shadow: 0 4px 12px #967359;
+  color: #967359;
 }
 
 .skills-wrapper {
@@ -218,8 +218,8 @@ body {
 }
 
 .skill-pill:hover {
-  border-color: var(--accent-color);
-  color: var(--accent-color);
+  border-color: #967359;
+  color: #967359;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
 }
@@ -330,8 +330,8 @@ body {
 }
 
 .icon-link-small:hover {
-  color: var(--accent-color);
-  background: #eff6ff;
+  color: #967359;
+  background: #F9F7F2;
 }
 
 .project-desc {
@@ -370,7 +370,7 @@ body {
   padding: 28px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
   border: 1px solid rgba(0,0,0,0.04);
-  border-left: 4px solid var(--accent-color); 
+  border-left: 4px solid #967359; 
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -394,7 +394,7 @@ body {
 
 .exp-company {
   font-size: 1rem;
-  color: var(--accent-color);
+  color: #967359;
   font-weight: 500;
   margin-top: 4px;
 }
